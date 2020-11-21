@@ -46,46 +46,53 @@
         let savedInput = 0.0;
         let opt = "";
 
+        function compute(){
+            console.info("compute().value = ");
+            let newInput = parseFloat(input.textContent);
+            let total = 0.0;
+            if(savedInput != 0){
+                switch(opt){
+                    case '+':
+                        total = savedInput + newInput;
+                        break;
+                    case '-':
+                        total = savedInput - newInput;
+                        break;
+                    case '*':
+                        total = savedInput * newInput;
+                        break;
+                    case '/':
+                        total = savedInput / newInput;
+                        break;
+                }
+            }
+
+            // sanitize output, fix floating points:
+            total = Math.round((total + Number.EPSILON) * 1000000000000) / 1000000000000
+
+            input.textContent = "";
+            input.textContent = total;
+        }
+
         function inputNumber(value){
             console.info("inputNumber().value = " + value);
             if(isValid(value)){
-                if(input.textContent == 0 || clearNext){
+                if(input.textContent === "0" || clearNext){
                     input.textContent = value;
                     clearNext = false;
                 } else {
-                    input.textContent = input.textContent + value;
+                    input.textContent = input.textContent + parseFloat(value);
                 }
             }
         }
 
         function inputOperator(value){
+            if (savedInput != 0) compute();
             console.info("inputOperator().value = " + value);
             savedInput = parseFloat(input.textContent);
             opt = value;
             clearNext = true;
             hasPeriod = false;
-        }
-
-        function compute(){
-            console.info("compute().value = ");
-            let newInput = parseFloat(input.textContent);
-            let total = 0.0;
-            switch(opt){
-                case '+':
-                    total = savedInput + newInput;
-                    break;
-                case '-':
-                    total = savedInput - newInput;
-                    break;
-                case '*':
-                    total = savedInput * newInput;
-                    break;
-                case '/':
-                    total = savedInput / newInput;
-                    break;
-            }
-            input.textContent = "";
-            input.textContent = total;
         }
 
         function isValid(value){
@@ -99,8 +106,9 @@
 
         function clearInput(){
             console.info("clearInput()");
-            input.textContent = "";
+            input.textContent = "0";
             hasPeriod = false;
+            savedInput = 0.0;
         }
 
         </script>
