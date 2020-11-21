@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="calculator">
+            <div class="input" id="input">0</div>
+            <div class="buttons">
+            <div class="operators">
+                <div onclick="inputOperator('+');">+</div>
+                <div onclick="inputOperator('-');">-</div>
+                <div onclick="inputOperator('*');">&times;</div>
+                <div onclick="inputOperator('/');">&divide;</div>
+            </div>
+            <div class="leftPanel">
+                <div class="numbers">
+                <div onclick="inputNumber(7);">7</div>
+                <div onclick="inputNumber(8);">8</div>
+                <div onclick="inputNumber(9);">9</div>
+                </div>
+                <div class="numbers">
+                <div onclick="inputNumber(4);">4</div>
+                <div onclick="inputNumber(5);">5</div>
+                <div onclick="inputNumber(6);">6</div>
+                </div>
+                <div class="numbers">
+                <div onclick="inputNumber(1);">1</div>
+                <div onclick="inputNumber(2);">2</div>
+                <div onclick="inputNumber(3);">3</div>
+                </div>
+                <div class="numbers">
+                <div onclick="inputNumber(0);">0</div>
+                <div id="period" onclick="inputNumber('.')">.</div>
+                <div id="clear" onclick="clearInput();">C</div>
+                </div>
+            </div>
+            <div class="equal" id="result" onclick="compute()">=</div>
+            </div>
+        </div>
+        <script type="text/javascript">
+        // Insert your code here
+        // Author: John Paulo Mataac
+
+        let hasPeriod = false;
+        let clearNext = false;
+        let savedInput = 0.0;
+        let opt = "";
+
+        function inputNumber(value){
+            console.info("inputNumber().value = " + value);
+            if(isValid(value)){
+                if(input.textContent == 0 || clearNext){
+                    input.textContent = value;
+                    clearNext = false;
+                } else {
+                    input.textContent = input.textContent + value;
+                }
+            }
+        }
+
+        function inputOperator(value){
+            console.info("inputOperator().value = " + value);
+            savedInput = parseFloat(input.textContent);
+            opt = value;
+            clearNext = true;
+            hasPeriod = false;
+        }
+
+        function compute(){
+            console.info("compute().value = ");
+            let newInput = parseFloat(input.textContent);
+            let total = 0.0;
+            switch(opt){
+                case '+':
+                    total = savedInput + newInput;
+                    break;
+                case '-':
+                    total = savedInput - newInput;
+                    break;
+                case '*':
+                    total = savedInput * newInput;
+                    break;
+                case '/':
+                    total = savedInput / newInput;
+                    break;
+            }
+            input.textContent = "";
+            input.textContent = total;
+        }
+
+        function isValid(value){
+            // Check if period is entered:
+            if(value === '.'){
+                if(hasPeriod) return false;
+                hasPeriod = true;
+            }
+            return true;
+        }
+
+        function clearInput(){
+            console.info("clearInput()");
+            input.textContent = "";
+            hasPeriod = false;
+        }
+
+        </script>
+      </body>
+</html>
