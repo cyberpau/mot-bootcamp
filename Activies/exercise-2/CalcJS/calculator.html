@@ -70,6 +70,7 @@
             // sanitize output, fix floating points:
             total = Math.round((total + Number.EPSILON) * 1000000000000) / 1000000000000
 
+            savedInput = "0";
             input.textContent = "";
             input.textContent = total;
         }
@@ -87,7 +88,7 @@
         }
 
         function inputOperator(value){
-            if (savedInput != 0) compute();
+            if (savedInput != "0") compute();
             console.info("inputOperator().value = " + value);
             savedInput = parseFloat(input.textContent);
             opt = value;
