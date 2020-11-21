@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>JavaScript program to concatenate 2 string </title>
+<style type="text/css">
+body {margin: 30px;}
+</style>
+</head>
+<body>
+<form>
+1st String : <input type="text" id="firstString" /><br>
+2nd String: <input type="text" id="secondString" /><br>
+<input type="button" onClick="concatString()" Value="Combine!" />
+</form>
+<p>The Result is : <br>
+<span id = "result"></span>
+</p>
+<script type="text/javascript">
+function concatString()
+{
+        str1 = document.getElementById("firstString").value;
+        str2 = document.getElementById("secondString").value;
+        document.getElementById("result").innerHTML = str1 + str2
+}
+</script>
+</body>
+</html>
