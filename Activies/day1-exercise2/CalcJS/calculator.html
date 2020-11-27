@@ -43,14 +43,14 @@
 
         let hasPeriod = false;
         let clearNext = false;
-        let savedInput = 0.0;
+        let savedInput;
         let opt = "";
 
         function compute(){
             console.info("compute().value = ");
             let newInput = parseFloat(input.textContent);
             let total = 0.0;
-            if(savedInput != 0){
+            //if(savedInput != 0){
                 switch(opt){
                     case '+':
                         total = savedInput + newInput;
@@ -64,8 +64,10 @@
                     case '/':
                         total = savedInput / newInput;
                         break;
+                    default:
+                        total = newInput;
                 }
-            }
+            //}
 
             // sanitize output, fix floating points:
             total = Math.round((total + Number.EPSILON) * 1000000000000) / 1000000000000
@@ -110,6 +112,7 @@
             input.textContent = "0";
             hasPeriod = false;
             savedInput = 0.0;
+            opt = "";
         }
 
         </script>
