@@ -1,0 +1,14 @@
+{
+  "testTimeout": 60000,
+  "reporters": [
+    "default",
+    [
+      "./node_modules/jest-html-reporter",
+      {
+        "pageTitle": "Tests for Search API & Search Ingest",
+        "outputPath": "reports/index.html",
+        "includeFailureMsg": true
+      }
+    ]
+  ]
+}
